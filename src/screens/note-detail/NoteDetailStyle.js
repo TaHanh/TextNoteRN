@@ -24,12 +24,14 @@ export default StyleSheet.create({
   containerBottom: {
 flexDirection: 'row',
 justifyContent: 'flex-end',
-marginRight: 15
+marginRight: 15,
+marginBottom: 30
   },
   btnSave: {
     backgroundColor: 'green',
     paddingHorizontal: 10,
     paddingVertical: 5,
     borderRadius: 5
+    
   }
 });
