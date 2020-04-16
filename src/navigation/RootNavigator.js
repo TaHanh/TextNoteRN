@@ -1,16 +1,15 @@
-import ListNoteScreen from "../screens/list-note/ListNoteScreen";
-import NoteDetailScreen from "../screens/note-detail/NoteDetailScreen";
+import {createStackNavigator} from 'react-navigation-stack';
+import ListNoteScreen from '../screens/list-note/ListNoteScreen';
+import NoteDetailScreen from '../screens/note-detail/NoteDetailScreen';
 
-const Stack = createStackNavigator();
+const RootNavigator = createStackNavigator(
+  {
+    ListNote: {screen: ListNoteScreen},
+    NoteDetail: {screen: NoteDetailScreen},
+  },
+  {
+    initialRouteName: 'ListNote',
+  },
+);
 
-function RootNavigator() {
-   return (
-     <NavigationContainer>
-       <Stack.Navigator initialRouteName="Home">
-         <Stack.Screen name="Home" component={ListNoteScreen} />
-         <Stack.Screen name="Details" component={NoteDetailScreen} />
-       </Stack.Navigator>
-     </NavigationContainer>
-   );
- }
- export default RootNavigator;
+export default RootNavigator;
