@@ -10,15 +10,16 @@ const NoteDetailScreen = (props) => {
 
 
   useEffect(()=>{
-    setData(props.navigation.getParam('item'))
-  })
+    setData(props.navigation.getParam('item'));
+  }, [])
 
   const onChangeText = (value) => {
-    data.content = value;
-    setData({
-      data
-    })
+    setData((arg) => ({
+      ...arg,
+      content: value,
+    }));
   }
+
   return (
     <View>
       <View style={styles.header}>
@@ -33,7 +34,7 @@ const NoteDetailScreen = (props) => {
         </View>
       </View>
       <View style={styles.txtInput}>
-        <TextInput value={data.content} multiline numberOfLines={5} onChangeText={text => onChangeText(text)}  />
+        <TextInput value={data.content} multiline numberOfLines={5} onChangeText={onChangeText}  />
       </View>
       <View style={styles.containerBottom}>
       <TouchableOpacity  style={styles.btnSave}>
