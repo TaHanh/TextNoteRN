@@ -1,11 +1,27 @@
 /* eslint-disable prettier/prettier */
-import React from 'react';
+import React, { useState } from 'react';
 import {View, Text, FlatList, ScrollView, TouchableOpacity} from 'react-native';
 import styles from './ListNoteStyle';
 
-const ListNoteScreen = () => {
-  const clickNoteDetail = () => {
+const ListNoteScreen = (props) => {
+  const [data, setData] = useState([
 
+          {title: 'Dan',content: "abc" },
+          {title: 'Dominic',content: "abc"},
+          {title: 'Jackson',content: "abc"},
+          {title: 'James',content: "abc"},
+          {title: 'Joel',content: "abc"},
+          {title: 'John',content: "abc"},
+          {title: 'Jillian',content: "abc"},
+          {title: 'Jimmy',content: "abc"},
+          {title: 'Julie',content: "abc"},
+       
+  ])
+  const clickNoteDetail = (item, index) => {
+      props.navigation.navigate('NoteDetail', {
+        'item': item,
+        'index': index
+      });
   }
   return (
     <View>
@@ -14,40 +30,13 @@ const ListNoteScreen = () => {
       </View>
       
       <FlatList
-        data={[
-          {key: 'Devin'},
-          {key: 'Dan'},
-          {key: 'Dominic'},
-          {key: 'Jackson'},
-          {key: 'James'},
-          {key: 'Joel'},
-          {key: 'John'},
-          {key: 'Jillian'},
-          {key: 'Jimmy'},
-          {key: 'Julie'},
-          {key: 'Jillian'},
-          {key: 'Jimmy'},
-          {key: 'Julie'},
-          {key: 'Devin'},
-          {key: 'Dan'},
-          {key: 'Dominic'},
-          {key: 'Jackson'},
-          {key: 'James'},
-          {key: 'Joel'},
-          {key: 'John'},
-          {key: 'Jillian'},
-          {key: 'Jimmy'},
-          {key: 'Julie'},
-          {key: 'Jillian'},
-          {key: 'Jimmy'},
-          {key: 'Julie'},
-        ]}
+        data={data}
         renderItem={({item, index}) => (
-          <TouchableOpacity onPress={clickNoteDetail}>
+          <TouchableOpacity onPress={() => clickNoteDetail(item, index)}>
               <View style={styles.containerList} key={{index}}>
-            <Text style={styles.titleList}>{item.key}</Text>
+            <Text style={styles.titleList}>{item.title}</Text>
             <View>
-            <Text style={styles.titleList}>{item.key}</Text>
+            <Text style={styles.titleList}>{item.title}</Text>
             </View>
           </View>
           </TouchableOpacity>

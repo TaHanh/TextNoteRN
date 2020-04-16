@@ -1,53 +1,45 @@
 /* eslint-disable prettier/prettier */
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {View, Text, FlatList, ScrollView} from 'react-native';
 import styles from './NoteDetailStyle';
+import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
 
-const NoteDetailScreen = () => {
+const NoteDetailScreen = (props) => {
+
+  const [data, setData] = useState("Text Note");
+
+
+  useEffect(()=>{
+    setData(props.navigation.getParam('item'))
+  })
+
+  const onChangeText = (value) => {
+    data.content = value;
+    setData({
+      data
+    })
+  }
   return (
     <View>
       <View style={styles.header}>
-        <Text style={styles.txtHeader}>Text Note</Text>
+        <Text style={styles.txtHeader}>{data ? data.title : "Text Note"}</Text>
+        <View style={styles.rightHeader}>
+          <TouchableOpacity>
+            <Text style={styles.txtRightHeader}>Sửa</Text>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Text style={styles.txtRightHeader}>Xóa</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-      
-      <FlatList
-        data={[
-          {key: 'Devin'},
-          {key: 'Dan'},
-          {key: 'Dominic'},
-          {key: 'Jackson'},
-          {key: 'James'},
-          {key: 'Joel'},
-          {key: 'John'},
-          {key: 'Jillian'},
-          {key: 'Jimmy'},
-          {key: 'Julie'},
-          {key: 'Jillian'},
-          {key: 'Jimmy'},
-          {key: 'Julie'},
-          {key: 'Devin'},
-          {key: 'Dan'},
-          {key: 'Dominic'},
-          {key: 'Jackson'},
-          {key: 'James'},
-          {key: 'Joel'},
-          {key: 'John'},
-          {key: 'Jillian'},
-          {key: 'Jimmy'},
-          {key: 'Julie'},
-          {key: 'Jillian'},
-          {key: 'Jimmy'},
-          {key: 'Julie'},
-        ]}
-        renderItem={({item, index}) => (
-          <View style={styles.containerList} key={{index}}>
-            <Text style={styles.titleList}>{item.key}</Text>
-            <View>
-            <Text style={styles.titleList}>{item.key}</Text>
-            </View>
-          </View>
-        )}
-      />
+      <View style={styles.txtInput}>
+        <TextInput value={data.content} multiline numberOfLines={5} onChangeText={text => onChangeText(text)}  />
+      </View>
+      <View style={styles.containerBottom}>
+      <TouchableOpacity  style={styles.btnSave}>
+            <Text style={styles.txtRightHeader}>Lưu</Text>
+          </TouchableOpacity>
+      </View>
     </View>
   );
 };

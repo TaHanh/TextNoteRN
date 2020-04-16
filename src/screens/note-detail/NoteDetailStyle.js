@@ -14,4 +14,22 @@ export default StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
+  txtInput: {
+    paddingHorizontal: 10,
+    // paddingVertical: 10,
+    margin: 10,
+    borderColor: "grey",
+    borderWidth: 1
+  },
+  containerBottom: {
+flexDirection: 'row',
+justifyContent: 'flex-end',
+marginRight: 15
+  },
+  btnSave: {
+    backgroundColor: 'green',
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    borderRadius: 5
+  }
 });

@@ -7,10 +7,21 @@ const ApplicationStyle = StyleSheet.create({
 backgroundColor: 'green',
 paddingHorizontal: 15,
 paddingVertical: 15,
+flexDirection: 'row',
+justifyContent: 'space-between'
   },
   txtHeader: {
     color: '#ffffff',
     fontSize: 20,
+  },
+  rightHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
+  txtRightHeader: {
+    color: '#ffffff',
+    fontSize: 16,
+    paddingHorizontal: 10,
   },
   mainContainer: {
     flex: 1,
