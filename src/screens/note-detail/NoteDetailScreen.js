@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import React, { useState, useEffect } from 'react';
-import {View, Text, FlatList, ScrollView, Modal, Image} from 'react-native';
+import {Alert, View, Text, FlatList, ScrollView, Modal, Image} from 'react-native';
 import styles from './NoteDetailStyle';
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
 

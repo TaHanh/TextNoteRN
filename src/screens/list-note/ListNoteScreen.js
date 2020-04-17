@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import {View, Text, FlatList, ScrollView, TouchableOpacity} from 'react-native';
 import styles from './ListNoteStyle';
+import update from 'immutability-helper';
 
 const ListNoteScreen = (props) => {
   const [data, setData] = useState([
@@ -26,14 +27,20 @@ const ListNoteScreen = (props) => {
         break;
       case "SAVE":
         console.log(value)
-        data[value.index].content = value.content;
-        setData(data)
+        const newUpdate = update(data, {
+          [value.index]: {
+            $merge: {
+              content: value.content,
+            },
+          },
+        });
+        setData(newUpdate);
         break;
-        case "EDIT_TITLE":
-          console.log(value)
+      case "EDIT_TITLE":
+        console.log(value)
         data[value.index].title = value.title;
         setData(data)
-          break;
+        break;
       default:
         break;
     }
