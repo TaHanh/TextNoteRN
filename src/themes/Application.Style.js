@@ -12,11 +12,15 @@ justifyContent: 'space-between'
   },
   txtHeader: {
     color: '#ffffff',
-    fontSize: 20,
+    fontSize: 22,
+    marginHorizontal: 15,
+    maxWidth: '50%',
   },
+ 
   rightHeader: {
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    alignItems: 'center'
   },
   txtRightHeader: {
     color: '#ffffff',
