@@ -17,12 +17,26 @@ const ListNoteScreen = (props) => {
           {title: 'Julie',content: "abc"},
        
   ])
+  const callBack= (key, value) => {
+    switch (key) {
+      case "DELETE":
+        console.log(value)
+        const newData = data.splice(value, 1);
+        setData(newData)
+        break;
+    
+      default:
+        break;
+    }
+  }
   const clickNoteDetail = (item, index) => {
       props.navigation.navigate('NoteDetail', {
-        'item': item,
-        'index': index
+        item,
+        index,
+        callBack
       });
   }
+
   return (
     <View>
       <View style={styles.header}>
@@ -40,7 +54,6 @@ const ListNoteScreen = (props) => {
             </View>
           </View>
           </TouchableOpacity>
-        
         )}
       />
     </View>

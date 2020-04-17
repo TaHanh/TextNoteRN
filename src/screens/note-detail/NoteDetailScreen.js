@@ -8,27 +8,46 @@ const NoteDetailScreen = (props) => {
 
   const [data, setData] = useState("Text Note");
 
-
+console.log(props.navigation.getParam('item'))
   useEffect(()=>{
-    setData(props.navigation.getParam('item'));
-  }, [])
+    setData(props.navigation.getParam('item'))
+  }, []);
 
   const onChangeText = (value) => {
     setData((arg) => ({
       ...arg,
       content: value,
     }));
-  }
+  };
+
+  const goBack = () => {
+    props.navigation.goBack();
+  };
+
+  const deleteItem = () => {
+    goBack();
+    props.navigation.state.params.callBack(
+      "DELETE",
+      props.navigation.getParam('index')
+    );
+  
+  };
 
   return (
-    <View>
+    <ScrollView>
       <View style={styles.header}>
-        <Text style={styles.txtHeader}>{data ? data.title : "Text Note"}</Text>
+        <View style={styles.rightHeader}>
+        <TouchableOpacity onPress={goBack}>
+            <Text style={styles.txtRightHeader}>Back</Text>
+          </TouchableOpacity>
+           <Text style={styles.txtHeader}>{data ? data.title : "Text Note"}</Text>
+        </View>
+       
         <View style={styles.rightHeader}>
           <TouchableOpacity>
             <Text style={styles.txtRightHeader}>Sửa</Text>
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={deleteItem} >
             <Text style={styles.txtRightHeader}>Xóa</Text>
           </TouchableOpacity>
         </View>
@@ -41,7 +60,7 @@ const NoteDetailScreen = (props) => {
             <Text style={styles.txtRightHeader}>Lưu</Text>
           </TouchableOpacity>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 export default NoteDetailScreen;
