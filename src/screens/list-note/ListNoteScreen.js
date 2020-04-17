@@ -2,10 +2,10 @@
 import React, { useState } from 'react';
 import {View, Text, FlatList, ScrollView, TouchableOpacity} from 'react-native';
 import styles from './ListNoteStyle';
+import update from 'immutability-helper';
 
 const ListNoteScreen = (props) => {
   const [data, setData] = useState([
-
           {title: 'Dan',content: "abc" },
           {title: 'Dominic',content: "abc"},
           {title: 'Jackson',content: "abc"},
@@ -20,11 +20,27 @@ const ListNoteScreen = (props) => {
   const callBack= (key, value) => {
     switch (key) {
       case "DELETE":
-        console.log(value)
-        const newData = data.splice(value, 1);
+        const newData = data.filter((item, index) => {
+          return value !== index;
+        })
         setData(newData)
         break;
-    
+      case "SAVE":
+        console.log(value)
+        const newUpdate = update(data, {
+          [value.index]: {
+            $merge: {
+              content: value.content,
+            },
+          },
+        });
+        setData(newUpdate);
+        break;
+      case "EDIT_TITLE":
+        console.log(value)
+        data[value.index].title = value.title;
+        setData(data)
+        break;
       default:
         break;
     }
@@ -50,7 +66,7 @@ const ListNoteScreen = (props) => {
               <View style={styles.containerList} key={{index}}>
             <Text style={styles.titleList}>{item.title}</Text>
             <View>
-            <Text style={styles.titleList}>{item.title}</Text>
+            <Text style={styles.titleList}>{item.content}</Text>
             </View>
           </View>
           </TouchableOpacity>
